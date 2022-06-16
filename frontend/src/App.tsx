@@ -39,7 +39,7 @@ const App: React.FC = () => {
           <main className="container">
               <Switch>
                 <Route path="/teams">
-                  <Teams />
+                  <Teams baseurl={BACKEND_API_URL} />
                 </Route>
                 <Route path="/join">
                   <Join baseurl={BACKEND_API_URL} />

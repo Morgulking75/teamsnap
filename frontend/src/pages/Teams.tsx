@@ -1,26 +1,18 @@
 import React from 'react';
 import TeamCard from '../components/TeamCard';
 
-
-const Teams: React.FC<{teams: any[]} & {getTeams: any}> = ({teams, getTeams}) => {
-  const [cards, setCards] = React.useState<any>([]);
+const Teams: React.FC<{teams: any[]} & {getTeams: any} & {baseurl: any}> = ({teams, getTeams, baseurl}) => {
   React.useEffect(() => {
-    setCards([]);
-  }, [teams]);
-
-  React.useEffect(() => {
-    getTeams();
+    getTeams({url: baseurl + "/teams"});
   }, []);
 
-  React.useEffect(() => {
-    teams?.forEach((team) => {
-      setCards([...cards, <TeamCard teamName={team.teamName} />]);
-    });
-  }, [teams]);
+  function renderTeams() {
+    return (teams || []).map((team, index) => <TeamCard teamName={team.name} captain={team.captain} key={index} url={baseurl} />);
+  }
 
   return (
     <>
-      {cards}
+      {renderTeams()}
     </>
   );
 }
